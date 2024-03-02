@@ -8,8 +8,10 @@ const TheHeader = () => {
   const dispatch = useDispatch;
 
   const { user } = useSelector((state) => state.auth);
+
   const onLogout = (e) => {
     e.preventDefault();
+    console.log("trying to logout");
     dispatch(logout());
     navigate("/login");
   };
@@ -19,7 +21,7 @@ const TheHeader = () => {
       <div>
         {user ? (
           <>
-            <button onClick={logout}>Logout</button>
+            <button onClick={onLogout}>Logout</button>
             <Link to="/profile">Profile</Link>
           </>
         ) : (

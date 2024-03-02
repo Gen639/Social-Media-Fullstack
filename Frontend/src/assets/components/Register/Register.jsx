@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { register } from "../../redux/auth/authSlice";
+import { register, reset } from "../../redux/auth/authSlice";
 import { notification } from "antd";
 
 const Register = () => {
@@ -13,7 +13,7 @@ const Register = () => {
   const { username, email, password, password2 } = formData;
 
   const dispatch = useDispatch();
-  const { isSuccess, message } = useSelector((state) => state.auth);
+  const { isSuccess, message, isError } = useSelector((state) => state.auth);
 
   useEffect(() => {
     if (isSuccess) {
@@ -22,7 +22,14 @@ const Register = () => {
         description: message,
       });
     }
-  }, [isSuccess]);
+    if (isError) {
+      notification.error({
+        message: "Error",
+        description: message,
+      });
+    }
+    dispatch(reset());
+  }, [isSuccess, isError, message]);
 
   const onChange = (e) => {
     setFormData((prevState) => ({
@@ -34,17 +41,13 @@ const Register = () => {
     e.preventDefault();
 
     if (password !== password2) {
-      return notification.error({
-        message: "Error",
-        description: "Passwords do not match ",
-      });
+      // return notification.error({
+      //   message: "Error",
+      //   description: "Passwords do not match ",
+      // });
     } else {
       console.log("formData", formData);
       dispatch(register(formData));
-      return notification.success({
-        message: "Error",
-        description: "Passwords do not match ",
-      });
     }
   };
   return (

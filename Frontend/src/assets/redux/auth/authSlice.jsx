@@ -16,19 +16,39 @@ const initialState = {
   message: "",
 };
 
-export const register = createAsyncThunk("auth/register", async (user) => {
-  try {
-    return await authService.register(user);
-  } catch (error) {
-    console.error(error);
+export const register = createAsyncThunk(
+  "auth/register",
+  async (user, thunkAPI) => {
+    try {
+      return await authService.register(user);
+    } catch (error) {
+      // console.error("Error in register:", error.response.data);
+      console.error(
+        "Error in register MESSAGE:",
+        error.response.data.message.join(", ")
+      );
+      let message;
+      if (error.response.data.message) {
+        message = error.response.data.message.join(", ");
+      } else if (error.response.data.messages) {
+        message = error.response.data.message;
+      } else {
+        message = "";
+      }
+
+      // const message = error.response.data.messages;
+
+      console.log(`The message should be`, error.response.data.messages);
+      return thunkAPI.rejectWithValue(message);
+    }
   }
-});
+);
 
 export const login = createAsyncThunk("auth/login", async (user, thunkAPI) => {
   try {
     return await authService.login(user);
   } catch (error) {
-    const message = error.response.data.error;
+    const message = error.response.data.message;
     return thunkAPI.rejectWithValue(message);
   }
 });
@@ -44,12 +64,22 @@ export const logout = createAsyncThunk("auth/logout", async () => {
 export const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {},
+  reducers: {
+    reset: (state) => {
+      state.isError = false;
+      state.isSuccess = false;
+      state.message = "";
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(login.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.token = action.payload.token;
+      })
+      .addCase(login.rejected, (state, action) => {
+        state.isError = true;
+        state.message = action.payload;
       })
       .addCase(logout.fulfilled, (state, action) => {
         state.user = null;
@@ -58,8 +88,14 @@ export const authSlice = createSlice({
       .addCase(register.fulfilled, (state, action) => {
         state.isSuccess = true;
         state.message = action.payload.message;
+      })
+      .addCase(register.rejected, (state, action) => {
+        state.isError = true;
+        state.message = action.payload;
       });
   },
 });
+
+export const { reset } = authSlice.actions;
 
 export default authSlice.reducer;
