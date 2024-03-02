@@ -19,7 +19,7 @@ const TheHeader = () => {
       <div>
         {user ? (
           <>
-            <button onClink={logout}>Logout</button>
+            <button onClick={logout}>Logout</button>
             <Link to="/profile">Profile</Link>
           </>
         ) : (

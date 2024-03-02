@@ -1,6 +1,8 @@
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+require("dotenv").config();
+// const jwt_secret = process.env.JWT_SECRET;
 
 const UserController = {
   // Endpoint para registrar un usuario utilizando bcrypt
@@ -34,11 +36,17 @@ const UserController = {
           .send({ message: "User or Password are incorrect" });
       }
 
-      const token = jwt.sign({ _id: user._id }, jwt_secret);
+      const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
+
       if (user.tokens.length > 4) user.tokens.shift();
       user.tokens.push(token);
+      console.log(token);
       await user.save();
-      res.status(200).send({ message: "Login successful", user });
+      res.status(200).send({
+        message: "Login successful",
+        user,
+        tokens: user.tokens,
+      });
     } catch (error) {
       console.error("Error during login:", error);
       res.status(500).send({ message: "Internal Server Error" });

@@ -9,9 +9,12 @@ const register = async (userData) => {
 
 const login = async (userData) => {
   const res = await axios.post(`${API_URL}/users/login`, userData);
+
   if (res.data) {
+    console.log(res.data);
+    const lastToken = res.data.tokens[res.data.tokens.length - 1];
     localStorage.setItem("user", JSON.stringify(res.data.user));
-    localStorage.setItem("token", JSON.stringify(res.data.token));
+    localStorage.setItem("token", JSON.stringify(lastToken));
   }
   return res.data;
 };
