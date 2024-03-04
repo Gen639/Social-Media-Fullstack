@@ -5,8 +5,7 @@ import { logout } from "../../redux/auth/authSlice";
 
 const TheHeader = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch;
-
+  const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
 
   const onLogout = (e) => {

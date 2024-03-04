@@ -57,6 +57,7 @@ const UserController = {
     try {
       //const user = await User.findById(req.user.id);
       const user = await User.findOne({ _id: req.params._id });
+
       if (!user) {
         return res.status(404).send({ message: "User not found" });
       }
