@@ -17,7 +17,8 @@ const TheHeader = () => {
 
   return (
     <>
-      <div>
+      <nav>
+        <Link to="/">Home </Link>
         {user ? (
           <>
             <button onClick={onLogout}>Logout</button>
@@ -29,7 +30,7 @@ const TheHeader = () => {
             <Link to="/register">Register</Link>{" "}
           </>
         )}
-      </div>
+      </nav>
     </>
   );
 };

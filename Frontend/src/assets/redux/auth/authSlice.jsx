@@ -22,20 +22,7 @@ export const register = createAsyncThunk(
     try {
       return await authService.register(user);
     } catch (error) {
-      // console.error("Error in register:", error.response.data);
       console.error("Error in register MESSAGE:", error);
-      // let message;
-      // if (error.response.data.message) {
-      //   message = error.response.data.message.join(", ");
-      //   console.log(`The message should be`, message);
-      // } else if (error.response.data.messages) {
-      //   message = error.response.data.message;
-      //   console.log(`The message should be`, message);
-      // } else {
-      //   message = "";
-      // }
-
-      // const message = error.response.data.messages;
 
       const message = error.response.data.message;
 
@@ -77,6 +64,8 @@ export const authSlice = createSlice({
       .addCase(login.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.token = action.payload.token;
+        state.isSuccess = true;
+        state.message = action.payload.message;
       })
       .addCase(login.rejected, (state, action) => {
         state.isError = true;
