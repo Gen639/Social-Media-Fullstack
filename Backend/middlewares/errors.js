@@ -6,7 +6,7 @@ const handleValidationError = (err, res) => {
       chain += errors[i] + " || ";
     }
     const string = chain.slice(0, -4);
-    res.status(400).send({ messages: string });
+    res.status(400).send({ message: string });
   } else {
     res.status(400).send({ message: errors });
   }

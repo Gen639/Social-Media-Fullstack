@@ -23,22 +23,23 @@ export const register = createAsyncThunk(
       return await authService.register(user);
     } catch (error) {
       // console.error("Error in register:", error.response.data);
-      console.error(
-        "Error in register MESSAGE:",
-        error.response.data.message.join(", ")
-      );
-      let message;
-      if (error.response.data.message) {
-        message = error.response.data.message.join(", ");
-      } else if (error.response.data.messages) {
-        message = error.response.data.message;
-      } else {
-        message = "";
-      }
+      console.error("Error in register MESSAGE:", error);
+      // let message;
+      // if (error.response.data.message) {
+      //   message = error.response.data.message.join(", ");
+      //   console.log(`The message should be`, message);
+      // } else if (error.response.data.messages) {
+      //   message = error.response.data.message;
+      //   console.log(`The message should be`, message);
+      // } else {
+      //   message = "";
+      // }
 
       // const message = error.response.data.messages;
 
-      console.log(`The message should be`, error.response.data.messages);
+      const message = error.response.data.message;
+
+      console.log(message);
       return thunkAPI.rejectWithValue(message);
     }
   }

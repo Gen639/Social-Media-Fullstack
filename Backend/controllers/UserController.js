@@ -8,7 +8,10 @@ const UserController = {
   // Endpoint para registrar un usuario utilizando bcrypt
   async create(req, res, next) {
     try {
-      const password = bcrypt.hashSync(req.body.password, 10);
+      let password;
+      if (req.body.password) {
+        password = bcrypt.hashSync(req.body.password, 10);
+      }
 
       const user = await User.create({
         ...req.body,

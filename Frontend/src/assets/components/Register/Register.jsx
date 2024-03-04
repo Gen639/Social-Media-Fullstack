@@ -41,10 +41,10 @@ const Register = () => {
     e.preventDefault();
 
     if (password !== password2) {
-      // return notification.error({
-      //   message: "Error",
-      //   description: "Passwords do not match ",
-      // });
+      return notification.error({
+        message: "Error",
+        description: "Passwords do not match ",
+      });
     } else {
       console.log("formData", formData);
       dispatch(register(formData));
