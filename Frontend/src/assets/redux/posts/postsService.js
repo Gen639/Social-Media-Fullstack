@@ -30,12 +30,26 @@ const like = async (_id) => {
   );
   return res.data;
 };
+const dislike = async (_id) => {
+  const token = JSON.parse(localStorage.getItme("token"));
+  const res = await axios.delete(
+    `${API_URL}/posts/unlike/${_id}`,
+    {},
+    {
+      headers: {
+        authorization: token,
+      },
+    }
+  );
+  return res.data;
+};
 
 const postsService = {
   getAll,
   getById,
   getPostByTitle,
   like,
+  dislike,
 };
 
 export default postsService;
