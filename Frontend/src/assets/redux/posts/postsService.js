@@ -13,14 +13,29 @@ const getById = async (id) => {
   return res.data.posts[0];
 };
 const getPostByTitle = async (postTitle) => {
-  const res = await axios.get(API_URL + "/posts/getAll?title=" + title);
+  const res = await axios.get(API_URL + "/posts/getAll?title=" + postTitle);
   return res.data.posts;
+};
+
+const like = async (_id) => {
+  const token = JSON.parse(localStorage.getItem("token"));
+  const res = await axios.put(
+    `${API_URL}/posts/like/${_id}`,
+    {},
+    {
+      headers: {
+        authorization: token,
+      },
+    }
+  );
+  return res.data;
 };
 
 const postsService = {
   getAll,
   getById,
   getPostByTitle,
+  like,
 };
 
 export default postsService;

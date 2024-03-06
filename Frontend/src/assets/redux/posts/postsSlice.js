@@ -26,12 +26,19 @@ export const getPostByTitle = createAsyncThunk(
   "posts/getPostByTitle",
   async (title) => {
     try {
-      return await postsService.getPostByTitle(id);
+      return await postsService.getPostByTitle(title);
     } catch (error) {
       console.error(error);
     }
   }
 );
+export const like = createAsyncThunk("posts/like", async (_id) => {
+  try {
+    return await postsService.like(_id);
+  } catch (error) {
+    console.error(error);
+  }
+});
 
 export const postsSlice = createSlice({
   name: "posts",
@@ -52,7 +59,7 @@ export const postsSlice = createSlice({
       .addCase(getById.fulfilled, (state, action) => {
         state.post = action.payload;
       })
-      .addCase(getPostByName.fulfilled, (state, action) => {
+      .addCase(getPostByTitle.fulfilled, (state, action) => {
         state.posts = action.payload;
       });
   },

@@ -20,7 +20,7 @@ const TheHeader = () => {
     setText(e.target.value);
     if (e.key === "Enter") {
       // console.log(text);
-      navigate(`/search?=${text}`);
+      navigate(`/search/${text}`);
     }
   };
 

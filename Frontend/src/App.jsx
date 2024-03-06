@@ -20,7 +20,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/post/:id" element={<PostDetail />} />
-          <Route path="/search?=postTitle" element={<Search />} />
+          <Route path="/search/:postTitle" element={<Search />} />
         </Routes>
       </BrowserRouter>
     </div>
