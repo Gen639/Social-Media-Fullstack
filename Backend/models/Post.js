@@ -7,11 +7,11 @@ const PostSchema = new mongoose.Schema(
       type: ObjectId,
       ref: "User",
     },
-    email: {
-      type: String,
-      ref: "User",
-      required: [true, "Please write your email"],
-    },
+    // email: {
+    //   type: String,
+    //   ref: "User",
+    //   required: [true, "Please write your email"],
+    // },
     title: {
       type: String,
       required: [true, "Please write a title of you post"],
