@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { like, dislike } from "../../redux/posts/postsSlice";
+import { like, unlike } from "../../redux/posts/postsSlice";
 import { HeartOutlined, HeartFilled } from "@ant-design/icons";
 
 const Post = () => {
@@ -10,22 +10,27 @@ const Post = () => {
   const dispatch = useDispatch();
 
   const post = posts?.map((post, index) => {
-    const isLiked = post.likes?.includes(user?._id);
-    if (isLiked) {
-      console.log("is liked");
-    } else {
-      console.log("not liked");
-    }
+    const checkTheUserId = () => {
+      for (const obj of post.likes) {
+        if (obj.userId === user._id) {
+          return true;
+        }
+      }
+      return false;
+    };
+
+    const isLiked = checkTheUserId();
+
     return (
       <div key={post._id}>
-        <h3>Post nº {index}</h3>
+        <h3>Post nº {index + 1}</h3>
         <Link to={`/post/${post._id}`}>
           <p>{post.title}</p>
         </Link>
         <p>{post.content}</p>
         <span>Liked: {post.likes?.length} </span>
         {isLiked ? (
-          <HeartFilled onClick={() => dispatch(dislike(post._id))} />
+          <HeartFilled onClick={() => dispatch(unlike(post._id))} />
         ) : (
           <HeartOutlined onClick={() => dispatch(like(post._id))} />
         )}

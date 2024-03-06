@@ -28,20 +28,18 @@ const like = async (_id) => {
       },
     }
   );
-  return res.data;
+  return res.data.updatedPost;
 };
-const dislike = async (_id) => {
-  const token = JSON.parse(localStorage.getItme("token"));
-  const res = await axios.delete(
-    `${API_URL}/posts/unlike/${_id}`,
-    {},
-    {
-      headers: {
-        authorization: token,
-      },
-    }
-  );
-  return res.data;
+
+const unlike = async (_id) => {
+  const token = JSON.parse(localStorage.getItem("token"));
+  console.log("Token to check the unlike:", token);
+  const res = await axios.delete(`${API_URL}/posts/unlike/${_id}`, {
+    headers: {
+      authorization: token,
+    },
+  });
+  return res.data.updatedPost;
 };
 
 const postsService = {
@@ -49,7 +47,7 @@ const postsService = {
   getById,
   getPostByTitle,
   like,
-  dislike,
+  unlike,
 };
 
 export default postsService;
