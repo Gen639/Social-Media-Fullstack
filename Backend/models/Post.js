@@ -28,10 +28,6 @@ const PostSchema = new mongoose.Schema(
         userId: ObjectId,
         like: Boolean,
       },
-      // {
-      //   type: ObjectId,
-      //   ref: "User",
-      // },
     ],
     commentsIds: [
       {

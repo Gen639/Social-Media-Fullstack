@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { register, reset } from "../../redux/auth/authSlice";
 import { notification } from "antd";
 
+// initialsctae to do
 const Register = () => {
   const [formData, setFormData] = useState({
     username: "",
