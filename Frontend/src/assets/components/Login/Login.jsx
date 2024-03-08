@@ -38,7 +38,6 @@ const Login = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log("formData", formData);
     dispatch(login(formData));
   };
   return (

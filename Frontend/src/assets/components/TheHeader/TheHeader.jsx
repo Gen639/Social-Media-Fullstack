@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/auth/authSlice";
+import Container from "react-bootstrap/Container";
+import Navbar from "react-bootstrap/Navbar";
 
 const TheHeader = () => {
   const navigate = useNavigate();
@@ -30,8 +32,9 @@ const TheHeader = () => {
         <Link to="/">Home </Link>
         {user ? (
           <>
-            <button onClick={onLogout}>Logout </button>
+            <Link onClick={onLogout}>Logout </Link>
             <Link to="/profile">Profile </Link>
+            <Link to="/create">Write a post </Link>
             <input
               onKeyUp={handleChange}
               placeholder="search post"

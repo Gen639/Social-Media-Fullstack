@@ -10,6 +10,7 @@ import PrivateZone from "./guards/PrivateZone";
 import NotFound from "./assets/components/NotFound/NotFound";
 import Admin from "./assets/components/Admin/Admin";
 import AdminZone from "./guards/AdminZone";
+import CreatePost from "./assets/components/CreatePost/CreatePost";
 
 function App() {
   return (
@@ -36,6 +37,14 @@ function App() {
             element={
               <PrivateZone>
                 <Profile />
+              </PrivateZone>
+            }
+          />
+          <Route
+            path="/create"
+            element={
+              <PrivateZone>
+                <CreatePost />
               </PrivateZone>
             }
           />

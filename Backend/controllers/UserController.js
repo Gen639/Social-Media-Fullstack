@@ -31,12 +31,6 @@ const UserController = {
   async login(req, res) {
     try {
       const user = await User.findOne({ email: req.body.email });
-      // const isMatch = bcrypt.compareSync(req.body.password, user.password);
-      // if (!user || !isMatch) {
-      //   return res
-      //     .status(400)
-      //     .send({ message: "User or Password are incorrect" });
-      // }
 
       if (!user) {
         return res

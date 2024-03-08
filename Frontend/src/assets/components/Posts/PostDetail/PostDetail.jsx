@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 
 const PostDetail = () => {
   const { id } = useParams();
-  console.log(id);
 
   const { post } = useSelector((state) => state.posts);
 

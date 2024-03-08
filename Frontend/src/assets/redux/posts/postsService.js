@@ -33,7 +33,6 @@ const like = async (_id) => {
 
 const unlike = async (_id) => {
   const token = JSON.parse(localStorage.getItem("token"));
-  console.log("Token to check the unlike:", token);
   const res = await axios.delete(`${API_URL}/posts/unlike/${_id}`, {
     headers: {
       authorization: token,
