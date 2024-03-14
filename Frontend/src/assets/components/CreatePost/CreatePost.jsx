@@ -1,15 +1,22 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { create } from "../../redux/posts/postsSlice";
+import { useNavigate } from "react-router-dom";
 
 const CreatePost = () => {
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-
-  const handleTitleChange = (e) => {
-    setTitle(e.target.value);
+  const initialState = {
+    title: "",
+    content: "",
   };
+  const [formData, setFormData] = useState(initialState);
 
-  const handleContentChange = (e) => {
-    setContent(e.target.value);
+  const { title, content } = formData;
+  const dispatch = useDispatch();
+  const handleChange = (e) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
   };
 
   const handleSubmit = (e) => {
@@ -18,8 +25,9 @@ const CreatePost = () => {
     console.log("Title:", title);
     console.log("Content:", content);
 
-    setTitle("");
-    setContent("");
+    dispatch(create(formData));
+
+    setFormData(initialState);
   };
 
   return (
@@ -29,18 +37,18 @@ const CreatePost = () => {
         <label htmlFor="title">Title:</label>
         <input
           type="text"
-          id="title"
+          onChange={handleChange}
           value={title}
-          onChange={handleTitleChange}
+          name="title"
           required
         />
 
         <label htmlFor="content">Content:</label>
         <textarea
-          id="content"
+          onChange={handleChange}
           value={content}
-          onChange={handleContentChange}
           required
+          name="content"
         ></textarea>
 
         <button type="submit">Create Post</button>

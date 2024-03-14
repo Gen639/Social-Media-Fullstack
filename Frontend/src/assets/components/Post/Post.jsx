@@ -19,10 +19,19 @@ const Post = () => {
       return false;
     };
 
+    const isPostedByUser = post.userId === user._id;
+
+    const postStyle = {
+      backgroundColor: isPostedByUser ? "lightblue" : "white",
+      padding: "10px",
+      margin: "10px",
+      border: "1px solid #ccc",
+    };
+
     const isLiked = checkTheUserId();
 
     return (
-      <div key={post._id}>
+      <div key={post._id} style={postStyle}>
         <h3>Post nº {index + 1}</h3>
         <Link to={`/post/${post._id}`}>
           <p>{post.title}</p>
