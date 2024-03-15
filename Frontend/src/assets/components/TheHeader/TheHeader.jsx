@@ -25,7 +25,7 @@ const TheHeader = () => {
       navigate(`/search/${text}`);
     }
   };
-  const isAdmin = user.role === "admin";
+  const isAdmin = user?.role === "admin";
   return (
     <>
       <nav>
@@ -34,9 +34,9 @@ const TheHeader = () => {
           <>
             <Link onClick={onLogout}>Logout | </Link>
             <Link to="/profile">Profile | </Link>
-            <Link to="/create">Write a post |</Link>
+            <Link to="/create">Write a post | </Link>
 
-            {isAdmin && <Link to="/admin">Admin Panel |</Link>}
+            {isAdmin && <Link to="/admin">Admin Panel | </Link>}
             <input
               onKeyUp={handleChange}
               placeholder="Enter the title of the post "
@@ -45,8 +45,8 @@ const TheHeader = () => {
           </>
         ) : (
           <>
-            <Link to="/login">Login </Link>
-            <Link to="/register">Register </Link>{" "}
+            <Link to="/login">Login | </Link>
+            <Link to="/register">Register |</Link>{" "}
           </>
         )}
       </nav>

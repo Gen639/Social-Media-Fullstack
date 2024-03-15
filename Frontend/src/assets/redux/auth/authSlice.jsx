@@ -9,7 +9,9 @@ const initialState = {
   token: token ? token : null,
   isError: false,
   isSuccess: false,
+  isLoading: false,
   message: "",
+  users: [],
 };
 
 export const register = createAsyncThunk(
@@ -42,6 +44,14 @@ export const logout = createAsyncThunk("auth/logout", async () => {
   }
 });
 
+export const getAll = createAsyncThunk("auth/getAll", async () => {
+  try {
+    return await authService.getAll();
+  } catch (error) {
+    console.error(error);
+  }
+});
+
 export const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -50,6 +60,7 @@ export const authSlice = createSlice({
       state.isError = false;
       state.isSuccess = false;
       state.message = "";
+      state.isLoading = false;
     },
   },
   extraReducers: (builder) => {
@@ -75,6 +86,12 @@ export const authSlice = createSlice({
       .addCase(register.rejected, (state, action) => {
         state.isError = true;
         state.message = action.payload;
+      })
+      .addCase(getAll.fulfilled, (state, action) => {
+        state.users = action.payload;
+      })
+      .addCase(getAll.pending, (state) => {
+        state.isLoading = true;
       });
   },
 });

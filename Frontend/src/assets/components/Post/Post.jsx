@@ -18,7 +18,7 @@ const Post = () => {
       }
       return false;
     };
-
+    console.log(post);
     const isPostedByUser = post.userId === user._id;
 
     const postStyle = {

@@ -37,10 +37,17 @@ const logout = async () => {
   return res.data;
 };
 
+const getAll = async () => {
+  const res = await axios.get(`${API_URL}/users/getAll`);
+  console.log(res.data);
+  return res.data.users;
+};
+
 const authService = {
   register,
   login,
   logout,
+  getAll,
 };
 
 export default authService;

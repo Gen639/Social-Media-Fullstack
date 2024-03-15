@@ -60,7 +60,7 @@ const CommentController = {
       if (_id) {
         searchConditions._id = { $regex: new RegExp(_id, "i") };
       }
-      const posts = await Comment.find({ ...searchConditions })
+      const comments = await Comment.find({ ...searchConditions })
         .populate("comments.userId")
         .limit(limit)
         .skip((page - 1) * limit);
@@ -77,12 +77,10 @@ const CommentController = {
       const comment = await Comment.findByIdAndDelete(req.params._id, {
         new: true,
       });
-      res
-        .status(200)
-        .send({
-          message: "You have successfully deleted the comment",
-          comment,
-        });
+      res.status(200).send({
+        message: "You have successfully deleted the comment",
+        comment,
+      });
     } catch (error) {}
   },
 };

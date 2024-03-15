@@ -111,5 +111,12 @@ const UserController = {
       });
     }
   },
+
+  async getAll(req, res) {
+    try {
+      const users = await User.find();
+      res.status(200).send({ message: "Succesfully retrieved users", users });
+    } catch (error) {}
+  },
 };
 module.exports = UserController;
