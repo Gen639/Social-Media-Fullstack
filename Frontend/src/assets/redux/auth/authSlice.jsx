@@ -52,6 +52,14 @@ export const getAll = createAsyncThunk("auth/getAll", async () => {
   }
 });
 
+export const deleteUser = createAsyncThunk("auth/deleteUser", async (_id) => {
+  try {
+    return await authService.deleteUser(_id);
+  } catch (error) {
+    console.error(error);
+  }
+});
+
 export const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -92,6 +100,24 @@ export const authSlice = createSlice({
       })
       .addCase(getAll.pending, (state) => {
         state.isLoading = true;
+      })
+      .addCase(deleteUser.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteUser.fulfilled, (state, action) => {
+        state.isLoading = false;
+        console.log(`state.user before`, state.users);
+        state.users = state.users.filter(
+          (user) => user._id !== action.payload.user._id
+        );
+        console.log(`state.user after`, state.users);
+      })
+      .addCase(deleteUser.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload
+          ? action.payload
+          : "Error deleting user.";
       });
   },
 });

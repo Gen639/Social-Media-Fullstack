@@ -13,7 +13,7 @@ const TheHeader = () => {
 
   const onLogout = (e) => {
     e.preventDefault();
-    console.log("trying to logout");
+
     dispatch(logout());
     navigate("/login");
   };

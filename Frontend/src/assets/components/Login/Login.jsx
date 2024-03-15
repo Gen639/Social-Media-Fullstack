@@ -30,7 +30,7 @@ const Login = () => {
       notification.success({ message: "Success", description: message });
       setTimeout(() => {
         navigate("/profile");
-      }, 2000);
+      }, 1500);
     }
 
     dispatch(reset());

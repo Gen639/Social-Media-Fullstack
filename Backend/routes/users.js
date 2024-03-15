@@ -8,6 +8,7 @@ router.post("/login", UserController.login);
 router.get("/id/:_id", authentication, isAdmin, UserController.getUserByID);
 router.get("/connected", authentication, UserController.getUserConnected);
 router.delete("/logout", authentication, UserController.logout);
-router.get("/getAll", UserController.getAll);
+router.get("/getAll", authentication, isAdmin, UserController.getAll);
+router.delete("/delete/:_id", authentication, isAdmin, UserController.delete);
 
 module.exports = router;

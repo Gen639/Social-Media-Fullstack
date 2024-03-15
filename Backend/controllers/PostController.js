@@ -139,7 +139,7 @@ const PostController = {
       const post = await Post.findByIdAndDelete(req.params._id, { new: true });
       res
         .status(200)
-        .send({ message: "You have succesfully deleter the post", post });
+        .send({ message: "You have succesfully deleted the post", post });
     } catch (error) {
       console.error(error);
       res
