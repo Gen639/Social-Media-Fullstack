@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { like, unlike } from "../../redux/posts/postsSlice";
-import { HeartOutlined, HeartFilled } from "@ant-design/icons";
+import { HeartOutlined, HeartFilled, CommentOutlined } from "@ant-design/icons";
 
 const Post = () => {
   const { posts } = useSelector((state) => state.posts);
@@ -32,10 +32,10 @@ const Post = () => {
 
     return (
       <div key={post._id} style={postStyle}>
-        <h3>Post nº {index + 1}</h3>
-        <Link to={`/post/${post._id}`}>
-          <p>{post.title}</p>
-        </Link>
+        <p>Post nº {index + 1}</p>
+        <div>
+          <h2>{post.title}</h2>
+        </div>
         <p>{post.content}</p>
         <span>Liked: {post.likes?.length} </span>
         {isLiked ? (
@@ -43,6 +43,13 @@ const Post = () => {
         ) : (
           <HeartOutlined onClick={() => dispatch(like(post._id))} />
         )}
+        <div>
+          <Link to={`/post/${post._id}`}>
+            {" "}
+            <span>Comments: {post.commentsIds?.length} </span>
+            <CommentOutlined />
+          </Link>
+        </div>
       </div>
     );
   });
