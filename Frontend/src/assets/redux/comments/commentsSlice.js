@@ -20,9 +20,16 @@ export const commentsSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getAll.fulfilled, (state, action) => {
-      state.comments = action.payload;
-    });
+    builder
+      .addCase(getAll.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getAll.fulfilled, (state, action) => {
+        state.comments = action.payload;
+      })
+      .addCase(getAll.rejected, (state) => {
+        state.isLoading = false;
+      });
   },
 });
 

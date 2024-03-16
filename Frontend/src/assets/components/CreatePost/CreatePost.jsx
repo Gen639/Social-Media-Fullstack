@@ -12,6 +12,8 @@ const CreatePost = () => {
 
   const { title, content } = formData;
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const handleChange = (e) => {
     setFormData((prevState) => ({
       ...prevState,
@@ -32,7 +34,7 @@ const CreatePost = () => {
 
   return (
     <div>
-      <h1>Create a New Post</h1>
+      <h1>Share your thought</h1>
       <form onSubmit={handleSubmit}>
         <label htmlFor="title">Title:</label>
         <input
@@ -43,13 +45,15 @@ const CreatePost = () => {
           required
         />
 
-        <label htmlFor="content">Content:</label>
-        <textarea
-          onChange={handleChange}
-          value={content}
-          required
-          name="content"
-        ></textarea>
+        <div>
+          <label htmlFor="content">Content:</label>
+          <textarea
+            onChange={handleChange}
+            value={content}
+            required
+            name="content"
+          ></textarea>
+        </div>
 
         <button type="submit">Create Post</button>
       </form>
