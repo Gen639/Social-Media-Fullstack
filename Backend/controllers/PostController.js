@@ -44,9 +44,8 @@ const PostController = {
       const searchConditions = {};
       if (title) {
         searchConditions.title = { $regex: new RegExp(title, "i") };
-      }
-      if (_id) {
-        searchConditions._id = { $regex: new RegExp(_id, "i") };
+      } else if (_id) {
+        searchConditions._id = _id;
       }
 
       const posts = await Post.find({ ...searchConditions })
@@ -54,7 +53,7 @@ const PostController = {
         .limit(limit)
         .skip((page - 1) * limit);
 
-      res.send({ message: "Here are all posts", posts });
+      res.send({ message: "Here are all matching posts", posts });
     } catch (error) {
       console.error(error);
     }

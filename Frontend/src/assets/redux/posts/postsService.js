@@ -7,9 +7,9 @@ const getAll = async () => {
   return res.data.posts;
 };
 
-const getById = async (id) => {
-  const res = await axios.get(API_URL + "/posts/getAll?id=" + id);
-  // console.log(res.data.posts[0]);
+const getById = async (_id) => {
+  const res = await axios.get(API_URL + "/posts/getAll?_id=" + _id);
+  console.log(`this is res.data.posts`, res.data.posts);
   return res.data.posts[0];
 };
 const getPostByTitle = async (postTitle) => {

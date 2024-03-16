@@ -1,0 +1,22 @@
+import React, { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import Comment from "./Comment/Comment";
+import { useDispatch, useSelector } from "react-redux";
+import { getAll } from "../../redux/comments/commentsSlice";
+
+const Comments = () => {
+  const { id } = useParams();
+  console.log(`id   `, id);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getAll(id));
+  }, []);
+  return (
+    <>
+      <div>Comments</div>
+      <Comment />
+    </>
+  );
+};
+
+export default Comments;

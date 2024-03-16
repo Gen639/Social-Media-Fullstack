@@ -9,7 +9,9 @@ const Post = () => {
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
-  const post = posts?.map((post, index) => {
+  const reversedPosts = posts.slice().reverse();
+
+  const post = reversedPosts?.map((post, index) => {
     const checkTheUserId = () => {
       for (const obj of post.likes) {
         if (obj.userId === user._id) {

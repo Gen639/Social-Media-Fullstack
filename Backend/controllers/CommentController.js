@@ -19,6 +19,11 @@ const CommentController = {
         { $push: { commentedPostsIds: req.body.postId } },
         { new: true }
       );
+      await Post.findByIdAndUpdate(
+        req.body.postId,
+        { $push: { commentsIds: comment._id } },
+        { new: true }
+      );
       res.status(200).send({ message: "You have just commented", comment });
     } catch (error) {
       console.error(error);
@@ -52,23 +57,23 @@ const CommentController = {
   },
   async getAll(req, res) {
     try {
-      const { page = 1, limit = 10, title, _id } = req.query;
+      const { page = 1, limit = 10, title, postId } = req.query;
       const searchConditions = {};
       if (title) {
         searchConditions.title = { $regex: new RegExp(title, "i") };
       }
-      if (_id) {
-        searchConditions._id = { $regex: new RegExp(_id, "i") };
+      if (postId) {
+        searchConditions.postId = postId;
       }
       const comments = await Comment.find({ ...searchConditions })
-        .populate("comments.userId")
+        // .populate("comments.userId")
         .limit(limit)
         .skip((page - 1) * limit);
       res.status(200).send(comments);
     } catch (error) {
       console.error(error);
       res.status(500).send({
-        message: "There was a problem updating your comment",
+        message: "There was a problem retriving comments",
       });
     }
   },
