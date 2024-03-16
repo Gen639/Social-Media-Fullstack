@@ -13,7 +13,7 @@ Clonar el repositorio y instalar las dependencias. Hay que ir a cada carpeta y e
 Para ejecutar este proyecto, deberás agregar las siguientes variables de entorno a tu archivo .env. Se proporciona un ejemplo en .env.example en la carpeta Backend.
 PORT, MONGO_URI, JWT_SECRET
 
-Para levantar el servidor -`cd` a backend, ejecuta `npm pun serve`.
+Para levantar el servidor -`cd` a backend, ejecuta `npm run serve`.
 Para lanzar la applicacion, `cd` a frontend, ejecuta `npm run dev`.
 
 # Frontend
