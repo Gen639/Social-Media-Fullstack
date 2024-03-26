@@ -1,0 +1,45 @@
+.card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.091);
+  width: 100%;
+  max-width: 400px;
+}
+
+.title {
+  font-size: 24px;
+  margin: 0 0 16px 0;
+  background-color: rgba(0, 0, 0, 0.14);
+  padding: 0 10px;
+  border-radius: 5%;
+  display: inline-block;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+.subtitle,
+.p {
+  font-size: 14px;
+  margin: 0;
+  opacity: 0.6;
+}
+
+.post-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.user-post {
+  background-color: rgba(253, 209, 255, 0.483);
+  padding: "20px";
+  margin: "20px";
+  border: "1px solid #ccc";
+}

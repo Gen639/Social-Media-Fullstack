@@ -4,7 +4,9 @@ import Users from "../Users/Users";
 const Admin = () => {
   return (
     <>
-      <div>Admin</div>
+      <div>
+        <h1>Admin Panel</h1>
+      </div>
       <Users />
     </>
   );

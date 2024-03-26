@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { like, unlike } from "../../redux/posts/postsSlice";
 import { HeartOutlined, HeartFilled, CommentOutlined } from "@ant-design/icons";
+import "./Post.css";
 
 const Post = () => {
   const { posts } = useSelector((state) => state.posts);
@@ -24,7 +25,6 @@ const Post = () => {
     const isPostedByUser = post.userId === user._id;
 
     const postStyle = {
-      backgroundColor: isPostedByUser ? "lightblue" : "white",
       padding: "10px",
       margin: "10px",
       border: "1px solid #ccc",
@@ -33,24 +33,31 @@ const Post = () => {
     const isLiked = checkTheUserId();
 
     return (
-      <div key={post._id} style={postStyle}>
-        <p>Post nº {index + 1}</p>
+      <div
+        key={post._id}
+        style={postStyle}
+        className={`card ${isPostedByUser ? "user-post" : ""}`}
+      >
+        {/* <p>Post nº {index + 1}</p> */}
         <div>
-          <h2>{post.title}</h2>
+          <h2 className="title">{post.title}</h2>
         </div>
-        <p>{post.content}</p>
-        <span>Liked: {post.likes?.length} </span>
-        {isLiked ? (
-          <HeartFilled onClick={() => dispatch(unlike(post._id))} />
-        ) : (
-          <HeartOutlined onClick={() => dispatch(like(post._id))} />
-        )}
-        <div>
-          <Link to={`/post/${post._id}`}>
-            {" "}
-            <span>Comments: {post.commentsIds?.length} </span>
-            <CommentOutlined />
-          </Link>
+        <p className="content ">{post.content}</p>
+        <div className="post-footer">
+          <div className="likes">
+            <span>Liked: {post.likes?.length} </span>
+            {isLiked ? (
+              <HeartFilled onClick={() => dispatch(unlike(post._id))} />
+            ) : (
+              <HeartOutlined onClick={() => dispatch(like(post._id))} />
+            )}
+          </div>
+          <div className="comments">
+            <Link to={`/post/${post._id}`}>
+              <span>Comments: {post.commentsIds?.length} </span>
+              <CommentOutlined />
+            </Link>
+          </div>
         </div>
       </div>
     );

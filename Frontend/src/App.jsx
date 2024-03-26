@@ -11,54 +11,60 @@ import NotFound from "./assets/components/NotFound/NotFound";
 import Admin from "./assets/components/Admin/Admin";
 import AdminZone from "./guards/AdminZone";
 import CreatePost from "./assets/components/CreatePost/CreatePost";
+import Footer from "./assets/components/Footer/Footer";
 
 function App() {
   return (
-    <div className="App">
-      <BrowserRouter>
-        <TheHeader />
+    <div className="app">
+      <div className="content">
+        <BrowserRouter>
+          <div className="main-content">
+            <TheHeader />
+            <Routes>
+              <Route path="/register" element={<Register />} />
+              <Route path="/login" element={<Login />} />
 
-        <Routes>
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
-
-          <Route
-            path="/"
-            element={
-              <PrivateZone>
-                <Home />
-              </PrivateZone>
-            }
-          />
-          <Route path="/post/:id" element={<PostDetail />} />
-          <Route path="/search/:postTitle" element={<Search />} />
-          <Route
-            path="/profile"
-            element={
-              <PrivateZone>
-                <Profile />
-              </PrivateZone>
-            }
-          />
-          <Route
-            path="/create"
-            element={
-              <PrivateZone>
-                <CreatePost />
-              </PrivateZone>
-            }
-          />
-          <Route path="*" element={<NotFound />} />
-          <Route
-            path="/admin"
-            element={
-              <AdminZone>
-                <Admin />
-              </AdminZone>
-            }
-          />
-        </Routes>
-      </BrowserRouter>
+              <Route
+                path="/"
+                element={
+                  <PrivateZone>
+                    <Home />
+                  </PrivateZone>
+                }
+              />
+              <Route path="/post/:id" element={<PostDetail />} />
+              <Route path="/search/:postTitle" element={<Search />} />
+              <Route
+                path="/profile"
+                element={
+                  <PrivateZone>
+                    <Profile />
+                  </PrivateZone>
+                }
+              />
+              <Route
+                path="/create"
+                element={
+                  <PrivateZone>
+                    <CreatePost />
+                  </PrivateZone>
+                }
+              />
+              <Route path="*" element={<NotFound />} />
+              <Route
+                path="/admin"
+                element={
+                  <AdminZone>
+                    <Admin />
+                  </AdminZone>
+                }
+              />
+            </Routes>
+          </div>
+          <div className="footer"></div>
+        </BrowserRouter>
+      </div>
+      <Footer className="app-footer" />
     </div>
   );
 }
