@@ -34,25 +34,26 @@ const CreatePost = () => {
 
   return (
     <div>
-      <h1>Share your thought</h1>
+      <h2>Share your thoughts</h2>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="title">Title:</label>
         <input
           type="text"
+          placeholder="Title"
           onChange={handleChange}
           value={title}
-          name="title"
+          name="write a title"
           required
         />
 
         <div>
-          <label htmlFor="content">Content:</label>
-          <textarea
+          <input
+            type="text"
             onChange={handleChange}
             value={content}
             required
             name="content"
-          ></textarea>
+            placeholder="write a post"
+          />
         </div>
 
         <button type="submit">Create Post</button>

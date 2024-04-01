@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/auth/authSlice";
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
+import "./TheHeader.css";
 
 const TheHeader = () => {
   const navigate = useNavigate();
@@ -21,7 +22,6 @@ const TheHeader = () => {
   const handleChange = (e) => {
     setText(e.target.value);
     if (e.key === "Enter") {
-      // console.log(text);
       navigate(`/search/${text}`);
     }
   };

@@ -12,6 +12,7 @@ import Admin from "./assets/components/Admin/Admin";
 import AdminZone from "./guards/AdminZone";
 import CreatePost from "./assets/components/CreatePost/CreatePost";
 import Footer from "./assets/components/Footer/Footer";
+import "./App.css";
 
 function App() {
   return (
@@ -61,10 +62,11 @@ function App() {
               />
             </Routes>
           </div>
-          <div className="footer"></div>
+          <div className="app-footer">
+            <Footer />
+          </div>
         </BrowserRouter>
       </div>
-      <Footer className="app-footer" />
     </div>
   );
 }

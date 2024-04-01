@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { register, reset } from "../../redux/auth/authSlice";
 import { useNavigate } from "react-router-dom";
 import { notification } from "antd";
+import "./Register.css";
 
 // initialsctae to do
 const Register = () => {
@@ -60,14 +61,15 @@ const Register = () => {
   };
   return (
     <>
-      <h2> Register new user</h2>
-      <form onSubmit={onSubmit}>
+      <h2> Register New User</h2>
+      <form onSubmit={onSubmit} className="register-container">
         <input
           type="text"
           name="username"
           placeholder="introduce your name"
           value={username}
           onChange={onChange}
+          className="register-container-element"
         />
         <input
           type="email"
@@ -75,6 +77,7 @@ const Register = () => {
           placeholder="introduce your email"
           value={email}
           onChange={onChange}
+          className="register-container-element"
         />
         <input
           type="password"
@@ -82,6 +85,7 @@ const Register = () => {
           placeholder="introduce your password"
           value={password}
           onChange={onChange}
+          className="register-container-element"
         />
         <input
           type="password"
@@ -89,8 +93,11 @@ const Register = () => {
           placeholder="introduce your once again"
           value={password2}
           onChange={onChange}
+          className="register-container-element"
         />
-        <button type="submit">Register</button>
+        <button type="submit" className="register-container-button">
+          Register
+        </button>
       </form>
     </>
   );

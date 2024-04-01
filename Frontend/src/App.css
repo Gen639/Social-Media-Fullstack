@@ -1,26 +1,31 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
+/* App.css */
 
 .app {
-  height: 95%;
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
+  max-width: 1280px;
+  margin: 0 auto;
+
+  text-align: center;
 }
 
 .content {
-  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1; /* Allow content to expand */
+  margin: 15px;
+}
 
+.main-content {
+  flex: 1;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
 }
+
 .app-footer {
-  flex-shrink: 0;
   text-align: center;
-  margin-top: 2rem;
-  background-color: blue;
+  /* Ensure footer takes minimal space, adjust as needed */
 }

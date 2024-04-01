@@ -1,0 +1,14 @@
+.login-container {
+  margin: 15px;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(213, 198, 228);
+  align-items: center;
+}
+.login-container-element {
+  margin: 10px;
+}
+.login-container-button {
+  margin: 10px;
+  width: 60px;
+}

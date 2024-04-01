@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { login, reset } from "../../redux/auth/authSlice";
 import { notification } from "antd";
+import "./Login.css";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -41,25 +42,32 @@ const Login = () => {
     dispatch(login(formData));
   };
   return (
-    <form onSubmit={onSubmit}>
-      <input
-        type="email"
-        name="email"
-        placeholder="email"
-        value={email}
-        onChange={onChange}
-        required
-      />
-      <input
-        type="password"
-        name="password"
-        value={password}
-        placeholder="password"
-        onChange={onChange}
-        required
-      />
-      <button type="submit">Login</button>
-    </form>
+    <>
+      <h2>Login</h2>
+      <form onSubmit={onSubmit} className="login-container">
+        <input
+          type="email"
+          name="email"
+          placeholder="email"
+          value={email}
+          onChange={onChange}
+          required
+          className="login-container-element"
+        />
+        <input
+          type="password"
+          name="password"
+          value={password}
+          placeholder="password"
+          onChange={onChange}
+          required
+          className="login-container-element"
+        />
+        <button type="submit" className="login-container-button">
+          Login
+        </button>
+      </form>
+    </>
   );
 };
 export default Login;
