@@ -12,6 +12,7 @@ import Admin from "./assets/components/Admin/Admin";
 import AdminZone from "./guards/AdminZone";
 import CreatePost from "./assets/components/CreatePost/CreatePost";
 import Footer from "./assets/components/Footer/Footer";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
 function App() {

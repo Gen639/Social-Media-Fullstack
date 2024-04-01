@@ -89,6 +89,18 @@ export const postsSlice = createSlice({
         state.posts = state.posts.map((post) =>
           post._id === action.payload._id ? action.payload : post
         );
+      })
+      .addCase(create.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(create.fulfilled, (state, action) => {
+        state.posts.push(action.payload);
+        state.isLoading = false;
+      })
+      .addCase(create.rejected, (state, action) => {
+        console.error("Create post failed:", action.error.message);
+
+        state.isLoading = false;
       });
   },
 });

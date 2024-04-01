@@ -24,21 +24,20 @@ const Post = () => {
     console.log(post);
     const isPostedByUser = post.userId === user._id;
 
-    const postStyle = {
-      padding: "10px",
-      margin: "10px",
-      border: "1px solid #ccc",
-    };
+    // const postStyle = {
+    //   padding: "10px",
+    //   margin: "10px",
+    //   border: "1px solid #ccc",
+    // };
 
     const isLiked = checkTheUserId();
 
     return (
       <div
         key={post._id}
-        style={postStyle}
+        // style={postStyle}
         className={`card ${isPostedByUser ? "user-post" : ""}`}
       >
-        {/* <p>Post nº {index + 1}</p> */}
         <div>
           <h2 className="title">{post.title}</h2>
         </div>

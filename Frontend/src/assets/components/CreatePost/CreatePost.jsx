@@ -41,7 +41,7 @@ const CreatePost = () => {
           placeholder="Title"
           onChange={handleChange}
           value={title}
-          name="write a title"
+          name="title"
           required
         />
 
@@ -52,11 +52,11 @@ const CreatePost = () => {
             value={content}
             required
             name="content"
-            placeholder="write a post"
+            placeholder="Content"
           />
         </div>
 
-        <button type="submit">Create Post</button>
+        <button type="submit">Publish</button>
       </form>
     </div>
   );
