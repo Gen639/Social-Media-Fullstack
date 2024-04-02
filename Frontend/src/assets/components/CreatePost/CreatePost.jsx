@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { create } from "../../redux/posts/postsSlice";
 import { useNavigate } from "react-router-dom";
+import "./CreatePost.css";
 
 const CreatePost = () => {
   const initialState = {
@@ -35,7 +36,7 @@ const CreatePost = () => {
   return (
     <div style={{ margin: "15px" }}>
       <h2>Share your thoughts</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="create-post-container">
         <input
           type="text"
           placeholder="Title"
@@ -44,18 +45,14 @@ const CreatePost = () => {
           name="title"
           required
         />
-
-        <div>
-          <input
-            type="text"
-            onChange={handleChange}
-            value={content}
-            required
-            name="content"
-            placeholder="Content"
-          />
-        </div>
-
+        <input
+          type="text"
+          onChange={handleChange}
+          value={content}
+          required
+          name="content"
+          placeholder="Content"
+        />
         <button type="submit">Publish</button>
       </form>
     </div>

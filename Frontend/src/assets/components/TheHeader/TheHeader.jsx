@@ -30,7 +30,7 @@ const TheHeader = () => {
 
   const handleChange = (e) => {
     setText(e.target.value);
-    if (e.key === "Enter" && text.trim()) {
+    if (e.key === "Enter") {
       navigate(`/search/${text}`);
     }
   };
@@ -65,24 +65,12 @@ const TheHeader = () => {
                     </NavDropdown.Item>
                   )}
                 </NavDropdown>
-                <Form
-                  className="d-flex"
-                  onKeyUp={(e) => e.key === "Enter" && handleChange(e)}
-                >
-                  <FormControl
-                    type="search"
-                    placeholder="Search posts"
-                    className="me-2"
-                    aria-label="Search"
-                    onChange={(e) => setText(e.target.value)}
-                  />
-                  {/* <Button
-                    variant="outline-success"
-                    onClick={() => navigate(`/search/${text}`)}
-                  >
-                    Search
-                  </Button> */}
-                </Form>
+
+                <FormControl
+                  onKeyUp={handleChange}
+                  placeholder="Enter the title of the post "
+                  name="text"
+                />
               </>
             ) : (
               <>
