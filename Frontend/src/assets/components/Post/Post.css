@@ -1,11 +1,11 @@
-.user-post {
-  background-color: rgba(223, 109, 229, 0.672);
-  border: 1px solid #d25757;
+.card.user-post {
+  background-color: rgb(254, 255, 227);
+  border: 2px solid #ffffff;
 }
 .card {
-  background: #fff;
-  padding: 20px;
-  border-radius: 8px;
+  background-color: #fff;
+  /* padding: 20px; */
+  border-radius: 8px 8px 0 0;
   margin-bottom: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.091);
   width: 100%;
@@ -14,11 +14,14 @@
 
 .title {
   font-size: 24px;
-  margin: 0 0 16px 0;
-  background-color: rgba(66, 39, 39, 0.34);
+  margin-bottom: 16px;
+  border-radius: 8px;
+  border: 2px solid rgb(255, 255, 255);
+  background-color: rgb(204, 204, 204);
   padding: 0 10px;
-  border-radius: 5%;
+  padding: 8px 0;
   display: inline-block;
+  width: 100%;
 }
 
 .p {
@@ -33,4 +36,25 @@
   margin-top: 16px;
   font-size: 14px;
   text-transform: uppercase;
+}
+
+.post-footer button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid rgb(255, 255, 255);
+  background-color: rgb(204, 203, 203);
+  width: 50%;
+  height: 50px;
+}
+
+.post-info {
+  display: flex;
+  justify-content: space-around;
+}
+
+.post-info p {
+  font-size: 11px;
+  margin: 0;
+  opacity: 0.9;
 }

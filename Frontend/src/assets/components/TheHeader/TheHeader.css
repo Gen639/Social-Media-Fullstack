@@ -1,0 +1,5 @@
+.the-header-navigation {
+  display: flex;
+  justify-content: space-around;
+  min-width: 450px;
+}

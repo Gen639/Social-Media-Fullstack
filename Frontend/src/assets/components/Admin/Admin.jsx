@@ -4,10 +4,16 @@ import Users from "../Users/Users";
 const Admin = () => {
   return (
     <>
-      <div>
-        <h1>Admin Panel</h1>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <h2>Admin Panel</h2>
+        <Users />
       </div>
-      <Users />
     </>
   );
 };

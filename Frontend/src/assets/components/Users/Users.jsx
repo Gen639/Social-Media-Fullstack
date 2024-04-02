@@ -12,7 +12,7 @@ const Users = () => {
   }, []);
   return (
     <div>
-      <div>Users</div>
+      <div>Manage Users</div>
       {isLoading ? "Cargando..." : <User />}
     </div>
   );

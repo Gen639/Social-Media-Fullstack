@@ -21,42 +21,47 @@ const Post = () => {
       }
       return false;
     };
-    console.log(post);
+    // console.log(post);
     const isPostedByUser = post.userId === user._id;
-
-    // const postStyle = {
-    //   padding: "10px",
-    //   margin: "10px",
-    //   border: "1px solid #ccc",
-    // };
 
     const isLiked = checkTheUserId();
 
+    const manageLikes = () => {
+      if (!isLiked) {
+        dispatch(like(post._id));
+      }
+      if (isLiked) {
+        dispatch(unlike(post._id));
+      }
+    };
+    const formatDate = (dateString) => {
+      const date = new Date(dateString);
+      return date.toISOString().split("T")[0];
+    };
     return (
       <div
         key={post._id}
-        // style={postStyle}
         className={`card ${isPostedByUser ? "user-post" : ""}`}
       >
-        <div>
-          <h2 className="title">{post.title}</h2>
+        <h2 className="title">{post.title}</h2>
+
+        <div className="post-info">
+          <p>User ID:{post.userId}</p>
+          <p>Posted on: {formatDate(post.createdAt)}</p>
         </div>
+        <hr></hr>
         <p className="content ">{post.content}</p>
         <div className="post-footer">
-          <div className="likes">
-            <span>Liked: {post.likes?.length} </span>
-            {isLiked ? (
-              <HeartFilled onClick={() => dispatch(unlike(post._id))} />
-            ) : (
-              <HeartOutlined onClick={() => dispatch(like(post._id))} />
-            )}
-          </div>
-          <div className="comments">
+          <button className="likes" onClick={manageLikes}>
+            <span>Likes: {post.likes?.length} </span>
+            {isLiked ? <HeartFilled /> : <HeartOutlined />}
+          </button>
+          <button className="comments">
             <Link to={`/post/${post._id}`}>
               <span>Comments: {post.commentsIds?.length} </span>
               <CommentOutlined />
             </Link>
-          </div>
+          </button>
         </div>
       </div>
     );

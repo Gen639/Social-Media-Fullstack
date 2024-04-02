@@ -33,7 +33,7 @@ const CreatePost = () => {
   };
 
   return (
-    <div>
+    <div style={{ margin: "15px" }}>
       <h2>Share your thoughts</h2>
       <form onSubmit={handleSubmit}>
         <input

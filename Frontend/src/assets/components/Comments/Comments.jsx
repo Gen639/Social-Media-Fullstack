@@ -13,8 +13,15 @@ const Comments = () => {
   }, []);
   return (
     <>
-      <div>Comments</div>
-      <Comment />
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <p>Comments</p> <Comment />
+      </div>
     </>
   );
 };

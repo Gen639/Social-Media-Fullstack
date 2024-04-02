@@ -1,0 +1,20 @@
+.comment-container {
+  display: flex;
+  flex-direction: column;
+  width: 75%;
+  background-color: rgb(255, 255, 255);
+  border: 2px solid rgb(116, 114, 114);
+  border-radius: 7px;
+  margin-top: 5px;
+}
+.comment-container hr {
+  margin-top: 0;
+}
+
+.comment-title {
+  padding: 0;
+}
+
+.comment-title p {
+  margin-top: 5px;
+}

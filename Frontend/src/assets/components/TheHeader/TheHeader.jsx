@@ -11,7 +11,8 @@ import {
   FormControl,
   Button,
 } from "react-bootstrap";
-// import "./TheHeader.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./TheHeader.css";
 
 const TheHeader = () => {
   const navigate = useNavigate();
@@ -37,7 +38,13 @@ const TheHeader = () => {
   const isAdmin = user?.role === "admin";
 
   return (
-    <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
+    <Navbar
+      collapseOnSelect
+      expand="lg"
+      bg="light"
+      variant="light"
+      className="the-header-navigation"
+    >
       <Container>
         <Nav.Link as={Link} to="/" eventKey="/">
           Home
@@ -69,12 +76,12 @@ const TheHeader = () => {
                     aria-label="Search"
                     onChange={(e) => setText(e.target.value)}
                   />
-                  <Button
+                  {/* <Button
                     variant="outline-success"
                     onClick={() => navigate(`/search/${text}`)}
                   >
                     Search
-                  </Button>
+                  </Button> */}
                 </Form>
               </>
             ) : (

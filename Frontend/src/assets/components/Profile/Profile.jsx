@@ -5,9 +5,12 @@ const Profile = () => {
 
   return (
     <div>
-      <h2>Profile</h2>
-      <p>{user.username}</p>
-      <p>{user.email}</p>
+      <h2>Hello {user.username}</h2>
+      <p>Profile Info:</p>
+      <p>Email:{user.email}</p>
+      <p>You have written: *number of posts* posts.</p>
+      <p>You got *X* likes on your posts</p>
+      <p>Your posts were commented *X* times</p>
     </div>
   );
 };

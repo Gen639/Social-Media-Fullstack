@@ -17,9 +17,7 @@ const Posts = () => {
     <>
       <CreatePost />
       <div className="posts-container">
-        {/* <h2>Posts</h2> */}
         {isLoading ? "Cargando..." : <Post />}
-        {/* <Post /> */}
       </div>
     </>
   );
