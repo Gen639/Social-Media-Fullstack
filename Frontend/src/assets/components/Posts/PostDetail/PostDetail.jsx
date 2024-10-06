@@ -7,6 +7,7 @@ import Comments from "../../Comments/Comments";
 import { HeartOutlined, HeartFilled, CommentOutlined } from "@ant-design/icons";
 
 import "./PostDetail.css";
+import CreateComment from "../../CreateComment/CreateComment";
 
 const PostDetail = () => {
   const { id } = useParams();
@@ -26,7 +27,7 @@ const PostDetail = () => {
       ) ?? false
     );
   };
-  console.log(post);
+  console.log(`this is post`, post);
   const isLiked = checkTheUserId();
 
   const manageLikes = () => {
@@ -65,6 +66,9 @@ const PostDetail = () => {
           </div>
         </div>
       </div>
+      <>
+        <CreateComment />
+      </>
       <div>
         <Comments />
       </div>

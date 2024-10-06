@@ -14,11 +14,24 @@ export const getAll = createAsyncThunk("comments/getAll", async (id) => {
     console.error(error);
   }
 });
-
+export const create = createAsyncThunk(
+  "comments/create",
+  async (commentData) => {
+    try {
+      return await commentsService.create(commentData);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+);
 export const commentsSlice = createSlice({
   name: "comments",
   initialState,
-  reducers: {},
+  reducers: {
+    reset: (state) => {
+      state.isLoading = false;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getAll.pending, (state) => {
@@ -29,6 +42,12 @@ export const commentsSlice = createSlice({
       })
       .addCase(getAll.rejected, (state) => {
         state.isLoading = false;
+      })
+      .addCase(create.fulfilled, (state, action) => {
+        state.comments.push(action.payload);
+      })
+      .addCase(create.rejected, (state, action) => {
+        console.error("Create comment failed:", action.error.message);
       });
   },
 });

@@ -86,7 +86,9 @@ const CommentController = {
         message: "You have successfully deleted the comment",
         comment,
       });
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   },
 };
 

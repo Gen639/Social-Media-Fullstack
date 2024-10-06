@@ -10,7 +10,7 @@ const CommentSchema = new mongoose.Schema(
     postId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Post",
-      required: [true, "Please write the post that you want to comment to"],
+      // required: [true, "Please write the post that you want to comment to"],
     },
     content: {
       type: String,
