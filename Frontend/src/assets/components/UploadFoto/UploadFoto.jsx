@@ -1,31 +1,42 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
 import { notification } from "antd";
-import { reset } from "../../redux/auth/authSlice";
-
-import { updateProfileImg } from "../../redux/auth/authSlice";
+import { reset, updateProfileImg } from "../../redux/auth/authSlice";
 
 const defaultProfileImage = "/images/profile-pic.JPG";
 
 const UploadFoto = () => {
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
-
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, watch } = useForm();
 
   const [image, setImage] = useState(defaultProfileImage);
   const [showForm, setShowForm] = useState(false);
-  console.log(image);
+  const [isPictureSelected, setIsPictureSelected] = useState(false);
+  const formRef = useRef(null);
   const { isError, isSuccess, message } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        formRef.current &&
+        !formRef.current.contains(event.target) &&
+        !event.target.closest(".imageContainer")
+      ) {
+        setShowForm(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [formRef]);
 
   useEffect(() => {
     if (user && user.profileImg) {
       setImage(user.profileImg);
-
-      console.log(image);
     }
   }, [user]);
 
@@ -35,33 +46,39 @@ const UploadFoto = () => {
     }
     if (isSuccess) {
       notification.success({ message: "Success", description: message });
-      setShowForm((prevShowForm) => !prevShowForm);
-      setTimeout(() => {}, 1500);
+      setShowForm(false);
     }
-
     dispatch(reset());
-  }, [isError, isSuccess, message]);
+  }, [isError, isSuccess, message, dispatch]);
 
   const submitForm = (data) => {
-    console.log(data);
-
+    const file = data.picture[0];
     const formData = new FormData();
-    formData.append("picture", data.picture[0]);
+    formData.append("picture", file);
 
-    user && dispatch(updateProfileImg(formData));
+    // Set the preview image URL
+    setImage(URL.createObjectURL(file));
+
+    if (user) {
+      dispatch(updateProfileImg(formData));
+    }
+  };
+
+  const handleImageClick = () => {
+    setShowForm((prevShowForm) => !prevShowForm);
+  };
+
+  const handleFileChange = (event) => {
+    setIsPictureSelected(event.target.files.length > 0);
   };
 
   return (
     <>
-      <div
-        className="imageContainer"
-        onClick={() => setShowForm((prevShowForm) => !prevShowForm)}
-      >
-        {(image && (
+      <div className="imageContainer" onClick={handleImageClick}>
+        {image ? (
           <img
             width={400}
             height={300}
-            // src={user.profileImg}
             src={image}
             alt="profile"
             style={{
@@ -71,24 +88,26 @@ const UploadFoto = () => {
               objectFit: "cover",
             }}
           />
-        )) || <p>La imagen no está subida todavía</p>}
+        ) : (
+          <p>La imagen no está subida todavía</p>
+        )}
       </div>
 
       {showForm && (
-        <form onSubmit={handleSubmit(submitForm)}>
-          {/* <input
-          {...register("name", { required: "Recipe name is required" })}
-          type="text"
-          id="name"
-        /> */}
-          <input
-            {...register("picture", { required: "Image is required" })}
-            type="file"
-            id="picture"
-          />
-
-          <input type="submit" />
-        </form>
+        <div ref={formRef} className="form-container">
+          <form onSubmit={handleSubmit(submitForm)}>
+            <input
+              {...register("picture", { required: "Image is required" })}
+              type="file"
+              id="picture"
+              name="picture"
+              onChange={handleFileChange}
+            />
+            <button type="submit" disabled={!isPictureSelected}>
+              Upload
+            </button>
+          </form>
+        </div>
       )}
     </>
   );
