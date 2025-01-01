@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:8080";
+const API_URL = "http://192.168.1.72:8080";
 
 const getAll = async (postId) => {
   const token = JSON.parse(localStorage.getItem("token"));

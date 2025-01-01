@@ -60,6 +60,17 @@ export const deleteUser = createAsyncThunk("auth/deleteUser", async (_id) => {
   }
 });
 
+export const updateProfileImg = createAsyncThunk(
+  "auth/updateProfileImg",
+  async (formData) => {
+    try {
+      return await authService.updateProfileImg(formData);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+);
+
 export const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -118,6 +129,12 @@ export const authSlice = createSlice({
         state.message = action.payload
           ? action.payload
           : "Error deleting user.";
+      })
+      .addCase(updateProfileImg.fulfilled, (state, action) => {
+        state.user.profileImg = action.payload;
+        state.isSuccess = true;
+        state.message = "Picture succesfully changed";
+        console.log("from updateProfileImg.fulfilled", action.payload);
       });
   },
 });

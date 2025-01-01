@@ -19,6 +19,7 @@ const UserSchema = new mongoose.Schema(
     role: {
       type: String,
     },
+    profileImg: { type: String },
     tokens: [],
     likedPosts: [{ type: ObjectId, ref: "Post" }],
     publishedPostsIds: [{ type: ObjectId, ref: "Post" }],

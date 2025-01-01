@@ -21,4 +21,6 @@ app.use("/uploads", require("./routes/uploads"));
 
 app.use(typeError);
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(docs));
-app.listen(PORT, () => console.log(`Server started at port ${PORT}`));
+app.listen(PORT, "192.168.1.72", () =>
+  console.log(`Server started at port ${PORT}`)
+);

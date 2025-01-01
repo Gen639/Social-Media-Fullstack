@@ -1,10 +1,12 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import UploadFoto from "../UploadFoto/UploadFoto";
 const Profile = () => {
   const { user } = useSelector((state) => state.auth);
 
   return (
     <div>
+      <UploadFoto />
       <h2>Hello {user.username}</h2>
       <p>Profile Info:</p>
       <p>Email:{user.email}</p>

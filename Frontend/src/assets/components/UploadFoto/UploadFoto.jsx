@@ -3,30 +3,23 @@ import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
+import { notification } from "antd";
+import { reset } from "../../redux/auth/authSlice";
 
-import { updateCompanyImg } from "../../redux/auth/companyAuthSlice";
-import { updateTalentImg } from "../../redux/auth/talentAuthSlice";
+import { updateProfileImg } from "../../redux/auth/authSlice";
+
 const defaultProfileImage = "/images/profile-pic.JPG";
 
 const UploadFoto = () => {
+  const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
-
-  const { user: talentUser } = useSelector((state) => state.talentAuth);
-  const { user: companyUser } = useSelector((state) => state.companyAuth);
-
-  const user = talentUser || companyUser;
-  //   let user;
-  //   if (talentUser) {
-  //     let user = talentUser;
-  //   } else if (companyUser) {
-  //     user = companyUser;
-  //   }
 
   const { register, handleSubmit } = useForm();
 
   const [image, setImage] = useState(defaultProfileImage);
   const [showForm, setShowForm] = useState(false);
   console.log(image);
+  const { isError, isSuccess, message } = useSelector((state) => state.auth);
 
   useEffect(() => {
     if (user && user.profileImg) {
@@ -34,22 +27,28 @@ const UploadFoto = () => {
 
       console.log(image);
     }
-    // if (!user.profileImg) {
-    //   setImage(defaultProfileImage);
-    //   console.log(defaultProfileImage);
-    //   console.log(image);
-    // }
   }, [user]);
+
+  useEffect(() => {
+    if (isError) {
+      notification.error({ message: "Error", description: message });
+    }
+    if (isSuccess) {
+      notification.success({ message: "Success", description: message });
+      setShowForm((prevShowForm) => !prevShowForm);
+      setTimeout(() => {}, 1500);
+    }
+
+    dispatch(reset());
+  }, [isError, isSuccess, message]);
 
   const submitForm = (data) => {
     console.log(data);
 
     const formData = new FormData();
     formData.append("picture", data.picture[0]);
-    // formData.append("name", data.name);
 
-    talentUser && dispatch(updateTalentImg(formData));
-    companyUser && dispatch(updateCompanyImg(formData));
+    user && dispatch(updateProfileImg(formData));
   };
 
   return (
@@ -61,12 +60,13 @@ const UploadFoto = () => {
         {(image && (
           <img
             width={400}
+            height={300}
             // src={user.profileImg}
             src={image}
             alt="profile"
             style={{
-              maxWidth: "300px",
-              maxHeight: "300px",
+              width: "300px",
+              height: "300px",
               borderRadius: "50%",
               objectFit: "cover",
             }}

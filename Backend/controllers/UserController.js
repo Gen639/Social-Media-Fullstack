@@ -17,6 +17,7 @@ const UserController = {
         ...req.body,
         password,
         role: "user",
+        profileImg: "",
       });
 
       res.status(201).send({ message: "User succesfully registered", user });
