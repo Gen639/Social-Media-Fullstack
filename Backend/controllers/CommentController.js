@@ -57,7 +57,7 @@ const CommentController = {
   },
   async getAll(req, res) {
     try {
-      const { page = 1, limit = 10, title, postId } = req.query;
+      const { page = 1, limit = 100, title, postId } = req.query;
       const searchConditions = {};
       if (title) {
         searchConditions.title = { $regex: new RegExp(title, "i") };

@@ -27,6 +27,7 @@ const PostDetail = () => {
       ) ?? false
     );
   };
+
   console.log(`this is post`, post);
   const isLiked = checkTheUserId();
 

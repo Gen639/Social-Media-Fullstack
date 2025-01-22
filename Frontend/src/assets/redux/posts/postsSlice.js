@@ -83,12 +83,18 @@ export const postsSlice = createSlice({
         state.posts = state.posts.map((post) =>
           post._id === action.payload._id ? action.payload : post
         );
+        if (state.post._id === action.payload._id) {
+          state.post = action.payload;
+        }
       })
       .addCase(unlike.fulfilled, (state, action) => {
         console.log("Unlike Payload:", action.payload);
         state.posts = state.posts.map((post) =>
           post._id === action.payload._id ? action.payload : post
         );
+        if (state.post._id === action.payload._id) {
+          state.post = action.payload;
+        }
       })
       .addCase(create.pending, (state) => {
         state.isLoading = true;

@@ -19,7 +19,7 @@ const create = async (commentData) => {
       authorization: token,
     },
   });
-  return res.data;
+  return res.data.comment;
 };
 
 const commentsService = {

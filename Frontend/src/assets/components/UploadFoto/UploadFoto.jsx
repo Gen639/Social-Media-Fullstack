@@ -103,6 +103,7 @@ const UploadFoto = () => {
               name="picture"
               onChange={handleFileChange}
             />
+
             <button type="submit" disabled={!isPictureSelected}>
               Upload
             </button>

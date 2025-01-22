@@ -28,16 +28,18 @@ const Post = () => {
 
     const manageLikes = () => {
       if (!isLiked) {
-        dispatch(like(post._id));
-      }
-      if (isLiked) {
-        dispatch(unlike(post._id));
+        dispatch(like(post._id)).then(() => dispatch(getById(post._id)));
+      } else {
+        dispatch(unlike(post._id)).then(() => dispatch(getById(post._id)));
       }
     };
     const formatDate = (dateString) => {
       const date = new Date(dateString);
       return date.toISOString().split("T")[0];
     };
+    console.log(
+      `From post, the number of likes in the array of each post is ${post.likes.length}`
+    );
     return (
       <div
         key={post._id}
